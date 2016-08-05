@@ -3,7 +3,6 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends CommonController {
     public function index(){
-//        $this->display();
-        echo U('Login/index');
+        $this->display();
     }
 }
