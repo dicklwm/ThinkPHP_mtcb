@@ -1,0 +1,92 @@
+<include file="Public:header"/>
+    <style>
+        .panel-btnGroup{
+            margin-top: 10px;
+        }
+        .panel-header{
+            margin-bottom: 0px;
+        }
+    </style>
+
+<include file="Public:headnav"/>
+
+<div class="panel-group" id="accordion">
+
+    <div class="panel-body">
+
+        <div class="panel-header">
+           <ul class="list-group">
+               <li class="list-group-item">
+                   <p><b>请假申请单 VCT20160715</b></p>
+                   <p>张XX 2016-07-14 11：03：03</p>
+               </li>
+           </ul>
+        </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseOne">
+                        单据详情
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+
+                <ul class="list-group">
+                    <li class="list-group-item">申请人：张XX</li>
+                    <li class="list-group-item">部门名：销售部</li>
+                    <li class="list-group-item">岗位名：销售员</li>
+                    <li class="list-group-item">申请时间：2016-07-14 11：03：03</li>
+                    <li class="list-group-item">假别：事假</li>
+                    <li class="list-group-item">拟休假日期自 2016-07-15 至 2016-07-20</li>
+                    <li class="list-group-item">本年度第 2 次请假，拟请假 5 天</li>
+                    <li class="list-group-item">工作代理人：王XX</li>
+                    <li class="list-group-item">紧急联系电话：11111111111</li>
+                    <li class="list-group-item">审批状态：审批中</li>
+                    <li class="list-group-item">请假事由：XXXXXXXXXXXXXXXXXXXXXXXXX</li>
+                </ul>
+
+                </div>
+            </div>
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">
+                        历史审批意见
+                    </a>
+                </h4>
+            </div>
+
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <p>审核人：张XX</p>
+                        <p>审核意见：</p>
+                        <p>审核时间：2016-07-14 11：03：03</p>
+                        <p>状态：审批通过</p>
+                    </li>
+                    <li class="list-group-item">
+                        <p>审核人：赵XX</p>
+                        <p>审核意见：</p>
+                        <p>审核时间：2016-07-14 12：03：03</p>
+                        <p>状态：审批通过</p>
+                    </li>
+                </ul>
+            </div>
+
+    </div>
+
+        <div id="btnGroup" class="panel-btnGroup" align="right">
+            <button type="button" class="btn btn-success">任务提交</button>
+            <button type="button" class="btn btn-danger">任务退回</button>
+            <button type="button" class="btn btn-info">取消</button>
+        </div>
+
+</div>
+</div>
+</body>
+</html>
