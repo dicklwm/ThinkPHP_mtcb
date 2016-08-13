@@ -11,7 +11,6 @@ use Think\Controller;
 class LoginController extends Controller{
     //首页显示模板
     public function index(){
-
         $this->display();
     }
     //登陆操作
@@ -36,5 +35,9 @@ class LoginController extends Controller{
         }
     }
 
+    public function Logout(){
+        session('[destroy]'); // 销毁session
+        $this->success('登出成功',U('Login/index'),3);
+    }
 }
 
