@@ -33,6 +33,9 @@ class LoginController extends Controller{
             $_SESSION["orgName"] = $User[0]['orgName'];
             $this->redirect('index/index');
         }
+        else{
+            $this->error('用户名或密码错误，请重试',U('Login/index'),5);
+        }
     }
 
     public function Logout(){
