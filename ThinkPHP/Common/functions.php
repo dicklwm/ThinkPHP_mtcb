@@ -454,6 +454,7 @@ function import($class, $baseUrl = '', $ext=EXT) {
             $baseUrl = LIB_PATH;
         }else { // 加载其他模块的类库
             $baseUrl = APP_PATH;
+
         }
     }
     if (substr($baseUrl, -1) != '/')

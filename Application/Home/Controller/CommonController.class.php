@@ -12,9 +12,9 @@ use Think\Controller;
 class CommonController extends Controller{
 
     public function _initialize() {
-        if(!isset($_SESSION['userId'])){
-            $this->error('请先登陆',U('Login/index'));
-        }
+//        if(!isset($_SESSION['userId'])){
+//            $this->error('请先登陆',U('Login/index'));
+//        }
     }
 
 }

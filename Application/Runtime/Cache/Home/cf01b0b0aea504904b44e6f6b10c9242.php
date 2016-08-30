@@ -1,0 +1,1 @@
+<?php if (!defined('THINK_PATH')) exit();?>/ThinkPHP_mtcb/index.php/Home/index/index.html
