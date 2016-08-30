@@ -48,17 +48,24 @@ class WechatOauth2Controller extends Controller {
             // 获取个人信息
             $userinfo = getWeChatUserInfo($code, $appID, $appsecret);
 //            $userinfo['userId']=$userId;
+            //
             $StringUtil = new \Org\Util\String();
             $userinfo['id'] = $StringUtil->uuid();
+            $userinfo['systemTime'] = date("Y-m-d H:i:s");
 
             $TB_WeChatUserInfo = D('WeChatUserInfo');
+            $TB_WeChatBind = D('WeChatBind');
+
             $TB_WeChatUserInfo->data($userinfo)->add();
 
-            $TB_WeChatBind = D('TB_WeChatBind');
-            $TB_WeChatBind->data(array('id' => $StringUtil->uuid(), 'OpenId' => $userinfo['openid'], 'userId' => $userId))->add();
+
+            $TB_WeChatBind_data = array('id' => $StringUtil->uuid(), 'OpenId' => $userinfo['openid'], 'userId'=> $userId,'systemTime'=>date("Y-m-d H:i:s"));
+
+            $TB_WeChatBind->data($TB_WeChatBind_data)->add();
 
             echo json_encode($userinfo);
+            $this->success('绑定成功，请在系统中刷新数据');
         } else
-            echo 'error';
+            $this->error('绑定失败，参数有错');
     }
 }
