@@ -59,7 +59,7 @@ class WechatOauth2Controller extends Controller {
             $TB_WeChatUserInfo->data($userinfo)->add();
 
 
-            $TB_WeChatBind_data = array('id' => $StringUtil->uuid(), 'OpenId' => $userinfo['openid'], 'userId'=> $userId,'systemTime'=>date("Y-m-d H:i:s"));
+            $TB_WeChatBind_data = array('id' => $StringUtil->uuid(), 'OpenId' => $userinfo['openid'], 'userId' => $userId, 'systemTime' => date("Y-m-d H:i:s"));
 
             $TB_WeChatBind->data($TB_WeChatBind_data)->add();
 
