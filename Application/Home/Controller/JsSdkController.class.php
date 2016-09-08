@@ -1,6 +1,6 @@
 <?php
 /**
- * 文件名：JSSDK.class.php
+ * 文件名：JsSdkController.class.php
  * 作者: Min
  * 日期时间: 2016-09-08  20:59
  * 描述：
@@ -10,28 +10,27 @@ namespace Home\Controller;
 
 use Think\Controller;
 
-class JSSDK extends Controller {
+class JsSdkController extends Controller {
 
-    private $appId;
-    private $appSecret;
+    private	$appId = "wxc8793be48c555a1c";
+    private $appSecret = "9dbcfc2dfcc9560c48139b6aa9a99878";
 
     //构造器
-    public function __construct($appId, $appSecret) {
-        $this->appId = $appId;
-        $this->appSecret = $appSecret;
-    }
+    //public function __construct($appId, $appSecret) {
+    //    $this->appId = $appId;
+    //    $this->appSecret = $appSecret;
+    //}
 
     public function index(){
-        $addID = "wxc8793be48c555a1c";
-        $appsecret = "9dbcfc2dfcc9560c48139b6aa9a99878";
-        $jssdk = new JSSDK($addID, $appsecret);
-        $signPackage = $jssdk->GetSignPackage();
+
+        //$jssdk = new JsSdkController($addID, $appsecret);
+        $signPackage = $this->GetSignPackage();
         $this->assign("signPackage",$signPackage);
         $this->display();
     }
 
 
-    //获取签名包
+    //获取签名包，以下代码都是微信官方提供
     private function getSignPackage() {
         $jsapiTicket = $this->getJsApiTicket();
 
@@ -109,11 +108,12 @@ class JSSDK extends Controller {
         return $access_token;
     }
 
+    //JsApiTicket和access_token的缓存文件的写入和读取
     private function get_php_file($filename) {
-        return trim(substr(file_get_contents($filename), 15));
+        return trim(substr(file_get_contents(TEMP_PATH.$filename), 15));
     }
     private function set_php_file($filename, $content) {
-        $fp = fopen($filename, "w");
+        $fp = fopen(TEMP_PATH.$filename, "w");
         fwrite($fp, "<?php exit();?>" . $content);
         fclose($fp);
     }

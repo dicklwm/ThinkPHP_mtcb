@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang = "en">
 <head>
-    <meta charset = "UTF-8">
-    <title></title>
+    <meta charset = "utf-8">
+    <title>铭泰船舶移动端</title>
+    <link rel = "stylesheet" href = "__PUBLIC__/css/bootstrap.min.css">
+    <script src = "__PUBLIC__/js/bootstrap.min.js"></script>
+    <!-- 自适应移动端 -->
+    <meta name = "viewport" content = "width=device-width,initial-scale=1,user-scalable=0">
 </head>
-<body>
-<button id = "getLocation">获取当前地理位置</button>
+<style>
+    #sign{ width:100%; margin-top: 20px;}
+</style>
+<button type="button" class="btn btn-primary" id="sign">签到</button>
 
 </body>
 <script src = "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -24,14 +30,22 @@
     wx.config({
         debug: true,
         appId: '<?php echo $signPackage["appId"];?>',
-        timestamp: '<?php echo $signPackage["timestamp"];?>',
-        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-        signature: '<?php echo $signPackage["signature"];?>',
-        jsApiList: [
-            // 所有要调用的 API 都要加到这个列表中
-            'getLocation'
-        ]
-    });
+        timestamp: < ? php echo
+    $signPackage["timestamp"];
+    ?
+    >,
+    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+            signature
+    :
+    '<?php echo $signPackage["signature"];?>',
+            jsApiList
+    :
+    [
+        // 所有要调用的 API 都要加到这个列表中
+        'getLocation'
+    ]
+    })
+    ;
     wx.ready(function () {
         // 在这里调用 API
 
