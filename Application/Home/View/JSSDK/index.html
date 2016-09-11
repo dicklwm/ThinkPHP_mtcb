@@ -2,16 +2,45 @@
 <html lang = "en">
 <head>
     <meta charset = "utf-8">
-    <title>铭泰船舶移动端</title>
+    <title>微信签到</title>
     <link rel = "stylesheet" href = "__PUBLIC__/css/bootstrap.min.css">
+    <script src = "__PUBLIC__/js/jquery-1.12.3.min.js"></script>
     <script src = "__PUBLIC__/js/bootstrap.min.js"></script>
     <!-- 自适应移动端 -->
     <meta name = "viewport" content = "width=device-width,initial-scale=1,user-scalable=0">
 </head>
 <style>
-    #sign{ width:100%; margin-top: 20px;}
+    #sign { width: 100%; margin-top: 20px; }
 </style>
-<button type="button" class="btn btn-primary" id="sign">签到</button>
+<form action = "{:U('JsSdk/Sign')}" method = "post">
+    <button type = "button" class = "btn btn-primary" {$needSign} id = "sign">签到</button>
+</form>
+
+<div class = "table-responsive">
+    <table class = "table">
+        <caption style = "text-align: center;font-size: 20px;font-weight: bold;">签到记录</caption>
+        <thead>
+        <tr>
+            <th>签到人</th>
+            <th>微信昵称</th>
+            <th>签到时间</th>
+            <th>结果</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <volist name = "sign" id = "v">
+            <tr>
+                <td>{$v.userName}</td>
+                <td>{$v.nickName}</td>
+                <td>{$v.signTime}</td>
+                <td>{$v['result']?'成功':'失败'}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>
 
 </body>
 <script src = "http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
@@ -30,36 +59,59 @@
     wx.config({
         debug: true,
         appId: '<?php echo $signPackage["appId"];?>',
-        timestamp: < ? php echo
-    $signPackage["timestamp"];
-    ?
-    >,
-    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-            signature
-    :
-    '<?php echo $signPackage["signature"];?>',
-            jsApiList
-    :
-    [
-        // 所有要调用的 API 都要加到这个列表中
-        'getLocation'
-    ]
+        timestamp: <?php echo$signPackage["timestamp"];?>,
+        nonceStr: '<?php echo $signPackage["nonceStr"];?>',
+        signature: '<?php echo $signPackage["signature"];?>',
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'getLocation'
+        ]
     })
     ;
     wx.ready(function () {
         // 在这里调用 API
+        var openId = '{$openId}';
 
         // 7.2 获取当前地理位置
-        document.querySelector('#getLocation').onclick = function () {
+        $('#sign').click(function () {
             wx.getLocation({
                 success: function (res) {
-                    alert(JSON.stringify(res));
+                    $.ajax({
+                        type: "POST",
+                        url: "{:U('JsSdk/Sign')}",
+                        data: "res=" + JSON.stringify(res) + "&openId=" + openId,
+                        success: function (msg) {
+                            var jsonMsg = JSON.parse(msg);
+                            
+							//刷新页面数据
+							$('tbody').html('');
+								var html = "";
+								$.each(jsonMsg.trueResult, function (k, v) {
+
+									html += "<tr>";
+									html += "<td>" + v['userName'] + "</td>";
+									html += "<td>" + v['nickName'] + "</td>";
+									html += "<td>" + v['signTime'] + "</td>";
+									html += "<td>" + (v['result'] ? "成功" : "失败") + "</td>";
+									html += "</tr>";
+								});
+								$('tbody').html(html);
+							if(jsonMsg.result==1){
+								$('#sign').prop("disabled", true);
+								alert("签到成功");
+							}
+							else{
+								alert(jsonMsg.errorMsg);
+							}
+                        },
+                    });
                 },
                 cancel: function (res) {
                     alert('用户拒绝授权获取地理位置');
                 }
             });
-        };
+        });
     });
+
 </script>
 </html>

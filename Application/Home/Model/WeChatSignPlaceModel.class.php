@@ -12,8 +12,6 @@ use Think\Model;
 
 class WeChatSignPlaceModel extends Model {
 
-    protected $trueTableName = 'TB_WeChatSignPlace';
-
-
+    protected $trueTableName = 'TB_SignPlace';
 
 }

@@ -111,16 +111,4 @@ function getWeChatUserInfo($code, $appID, $appsecret) {
     return $userinfo_array;
 }
 
-//JsApiTicket和access_token的缓存文件的写入和读取
-function get_php_file($filename) {
-    return trim(substr(file_get_contents(DATA_PATH.$filename), 15));
-}
-function set_php_file($filename, $content) {
-    $fp = fopen(DATA_PATH.$filename, "w");
-    fwrite($fp, "<?php exit();?>" . $content);
-    fclose($fp);
-}
-
-
-
 ?>
