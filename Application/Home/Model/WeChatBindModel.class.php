@@ -10,7 +10,7 @@ namespace Home\Model;
 
 use Think\Model;
 
-class WeChatBindModel extends Model{
+class WeChatBindModel extends Model {
 
     protected $trueTableName    =   'TB_WeChatBind';
 }
